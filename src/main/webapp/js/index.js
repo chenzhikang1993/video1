@@ -149,7 +149,7 @@ $("#regPswAgain").blur(function () {
 
 $("#loginout").click(function () {
 
-    $.get('/' + getRootPath() + "/user/loginOut", null, function () {
+    $.get("/user/loginOut", null, function () {
         $("#regBlock").css("display", "block");
         $("#userBlock").css("display", "none");
     });

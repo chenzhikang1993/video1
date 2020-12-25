@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public Integer updateByEmail2(User user) {
         return userMapper.updateByEmail2(user);
     }
+
+    @Override
+    public int updatePasswoedByEmail(String email,String password) {
+        return userMapper.updatePasswoedByEmail(email,password);
+    }
 }

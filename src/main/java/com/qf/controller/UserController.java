@@ -32,6 +32,7 @@ public class UserController {
         User user1 = userService.selectUserByEmailAndPassword(user);
         if (user1 != null){
             HttpSession session = request.getSession();
+            session.setAttribute("user",user);
             session.setAttribute("userAccount",user1.getEmail());
             return "success";
         }
@@ -144,7 +145,72 @@ public class UserController {
         return "before/course";
     }
 
+    /**
+     * 前台退出1
+     * @param request
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpServletRequest request){
 
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("userAccount");
+
+        return "index";
+
+    }
+
+    /**
+     * 前台退出2
+     * @param request
+     * @return
+     */
+    @RequestMapping("loginOut2")
+    public String loginOut2(HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("userAccount");
+
+        return "index";
+
+    }
+
+    @RequestMapping("passwordSafe")
+    public String passwordSafe(){
+        return "before/password_safe";
+    }
+
+    /**
+     * 修改密码-验证旧密码
+     * @param password
+     * @param request
+     * @return
+     */
+    @RequestMapping("validatePassword")
+    @ResponseBody
+    public String validatePassword(String password,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (password.equals(user.getPassword())){
+            return "success";
+        }
+        return "false";
+    }
+
+    @RequestMapping("updatePassword")
+    public String updatePassword(HttpServletRequest request , String newPassword){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        userService.updatePasswoedByEmail(user.getEmail(),newPassword);
+
+        return "redirect:/user/showMyProfile";
+
+
+    }
 
 
 }

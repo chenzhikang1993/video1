@@ -2,12 +2,10 @@ package com.qf.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qf.pojo.Course;
-import com.qf.pojo.QueryVo;
-import com.qf.pojo.Speaker;
-import com.qf.pojo.Video;
+import com.qf.pojo.*;
 import com.qf.service.CourseService;
 import com.qf.service.SpeakerService;
+import com.qf.service.SubjectService;
 import com.qf.service.VideoService;
 import com.qf.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /*
     张乐乐
@@ -31,9 +30,14 @@ public class VideoController {
     private CourseService courseService;
     @Autowired
     private SpeakerService speakerService;
+    @Autowired
+    private SubjectService subjectService;
 
     @RequestMapping("/showVideo")
-    public String showVideo(String videoId, String subjectName, Model model) {
+    public String showVideo(HttpServletRequest request,String videoId, String subjectName, Model model) {
+        List<Subject> subjectList = subjectService.findAllSubject();
+        request.setAttribute("subjectList",subjectList);
+
         model.addAttribute("subjectName", subjectName);
         Video video = videoService.selectVideoById(videoId);
         model.addAttribute("video", video);
@@ -107,8 +111,10 @@ public class VideoController {
     }
 
     @RequestMapping("showVideo1")
-    public String showVideo1(String videoId, String subjectName, Model model) {
+    public String showVideo1(HttpServletRequest request,String videoId, String subjectName, Model model) {
 
+        List<Subject> subjectList = subjectService.findAllSubject();
+        request.setAttribute("subjectList",subjectList);
         model.addAttribute("subjectName",subjectName);
         //查询视频
         Video video = videoService.findById(videoId);

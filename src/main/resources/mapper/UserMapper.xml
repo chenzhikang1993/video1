@@ -39,4 +39,8 @@
 
     </update>
 
+    <update id="updatePasswoedByEmail">
+        update user set password=#{password} where email=#{email}
+    </update>
+
 </mapper>
