@@ -22,6 +22,14 @@ public class CourseController {
     @Autowired
     private SubjectService subjectService;
 
+    /**
+     * 课程列表下拉框
+     * 视频列表展示
+     * 陈志康
+     * @param subjectId
+     * @param request
+     * @return
+     */
     @RequestMapping("/course/{subjectId}")
     public String find(@PathVariable String subjectId, HttpServletRequest request){
 
