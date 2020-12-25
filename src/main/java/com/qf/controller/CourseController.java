@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 陈志康
+ */
+
 @Controller
 @RequestMapping("/course")
 public class CourseController {
