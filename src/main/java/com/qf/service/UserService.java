@@ -12,4 +12,6 @@ public interface UserService {
     public Integer updateByEmail(Map map);
 
     public Integer updateByEmail2(User user);
+
+    Boolean updateUser(User user);
 }

@@ -90,7 +90,7 @@
                       </c:if>
                       
                       <c:if test="${not empty user.imgUrl}">
-                         <img id="avatar" src="http://localhost:8081/video/${user.imgUrl}" alt="">
+                         <img id="avatar" src="http://localhost:8087/upload/${user.imgUrl}" alt="">
                       </c:if>
                        
                     </a>
@@ -114,7 +114,7 @@
                     <h3><a href="${pageContext.request.contextPath}/user/showMyProfile">返回个人中心</a></h3>
                     <div class="proflle_tab_workplace clearfix">
                         <div class="profile_avatar_area">
-                            <img width="180px" height="180px"  src="http://localhost:8081/video/${user.imgUrl}">
+                            <img width="180px" height="180px"  src="http://localhost:8087/upload/${user.imgUrl}">
                         </div>
                         <div class="profile_ifo_area">
                             <!--http://localhost/video/user/changeProfile-->

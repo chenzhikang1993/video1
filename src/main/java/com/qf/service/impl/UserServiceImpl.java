@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public Integer updateByEmail2(User user) {
         return userMapper.updateByEmail2(user);
     }
+
+    @Override
+    public Boolean updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
 }

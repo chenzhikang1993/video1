@@ -13,4 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
     public Integer updateByEmail(Map map);
 
     public Integer updateByEmail2(User user);
+
+    Boolean updateUser(User user);
 }
