@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
+/*
+    张乐乐
+*/
 @Controller
 @RequestMapping("video")
 public class VideoController {
+
     @Autowired
     private VideoService videoService;
     @Autowired
