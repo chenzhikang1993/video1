@@ -10,4 +10,5 @@ public interface CourseMapper {
     Course selectCourseById(String id);
 
     List<Course> selectAll();
+    public void ss();
 }
