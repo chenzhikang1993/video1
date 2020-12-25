@@ -6,6 +6,7 @@ import com.qf.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -14,5 +15,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin selectAdminByUsernameAndPassword(Admin admin) {
         return adminMapper.selectAdminByUsernameAndPassword(admin);
+
     }
 }

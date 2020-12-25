@@ -6,19 +6,41 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+//茹东杰
 @Repository
 public interface SpeakerMapper {
-    List<Speaker> selectAll();
+    Integer selectCountByQueryVo(QueryVo queryVo);
 
     List<Speaker> selectSpeakerByQueryVo(QueryVo queryVo);
 
-    Integer selectCountByQueryVo(QueryVo queryVo);
 
-    Boolean deleteById(String id);
+
+    Boolean updateSpeaker(Speaker speake);
+
+    void insertSpeaker(Speaker speaker);
 
     Speaker selectSpeakerById(String id);
 
-    Boolean insertSpeaker(Speaker speaker);
+    int deleteById(String id);
 
-    Boolean updateSpeaker(Speaker speaker);
+    List<Speaker> selectAll();
+
+
+//=======
+//@Repository
+//public interface SpeakerMapper {
+//
+//
+//    List<Speaker> selectSpeakerByQueryVo(QueryVo queryVo);
+//
+//    Integer selectCountByQueryVo(QueryVo queryVo);
+//
+//    Boolean deleteById(String id);
+//
+//    Speaker selectSpeakerById(String id);
+//
+//    Boolean insertSpeaker(Speaker speaker);
+//
+//    Boolean updateSpeaker(Speaker speaker);
+//>>>>>>> 16cde2030cf2931dca83518c1ec9084902a3020d
 }

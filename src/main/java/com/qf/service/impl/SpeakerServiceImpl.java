@@ -10,14 +10,46 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//茹东杰
+
 @Service
 public class SpeakerServiceImpl implements SpeakerService {
+
     @Autowired
     private SpeakerMapper speakerMapper;
 
+//    @Override
+//    public List<Speaker> findAll() {
+//        return speakerMapper.findAll();
+//    }
+
     @Override
-    public List<Speaker> selectAll() {
-        return speakerMapper.selectAll();
+    public Boolean UpdateSpeaker(Speaker speaker) {
+
+        return speakerMapper.updateSpeaker(speaker);
+
+
+    }
+
+
+    @Override
+    public Speaker selectById(String id) {
+        return speakerMapper.selectSpeakerById(id);
+    }
+
+    @Override
+    public boolean delById(String id) {
+        if (speakerMapper.deleteById(id) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void addSeaker(Speaker speaker) {
+        speakerMapper.insertSpeaker(speaker);
+
     }
 
     @Override
@@ -28,30 +60,17 @@ public class SpeakerServiceImpl implements SpeakerService {
         Integer total = speakerMapper.selectCountByQueryVo(queryVo);
 
         Page<Speaker> speakerPage = new Page<>();
-        speakerPage.setRows(speakerList);
-        speakerPage.setTotal(total);
+        speakerPage.setRows(speakerList);//行
+        speakerPage.setTotal(total);//7
         speakerPage.setPage(queryVo.getPage());
         speakerPage.setSize(queryVo.getSize());
 
         return speakerPage;
+
+
     }
 
-    @Override
-    public Boolean deleteById(String id) {
-        return speakerMapper.deleteById(id);
-    }
-
-    @Override
-    public Speaker selectSpeakerById(String id) {
-        return speakerMapper.selectSpeakerById(id);
-    }
-
-    @Override
-    public Boolean saveOrUpdate(Speaker speaker) {
-        if (null == speaker.getId()) {
-            return speakerMapper.insertSpeaker(speaker);
-        } else {
-            return speakerMapper.updateSpeaker(speaker);
-        }
+    public List<Speaker> selectAll() {
+        return speakerMapper.selectAll();
     }
 }
