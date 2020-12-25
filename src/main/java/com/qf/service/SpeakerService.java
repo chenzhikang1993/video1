@@ -5,12 +5,14 @@ import com.qf.pojo.Speaker;
 import com.qf.utils.Page;
 
 import java.util.List;
+
 //茹东杰
 public interface SpeakerService {
 
     Page<Speaker> selectSpeakerByQueryVo(QueryVo queryVo);
 
-    List <Speaker> findAll();
+    List <Speaker> selectAll();
+//    List <Speaker> findAll();
 
     Boolean UpdateSpeaker(Speaker speaker);
 
@@ -19,4 +21,5 @@ public interface SpeakerService {
     boolean delById(String id);
 
     void addSeaker(Speaker speaker);
+
 }

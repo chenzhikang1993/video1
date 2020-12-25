@@ -17,7 +17,7 @@
 <!--        select * from admin;-->
 <!--    </select>-->
 
-    <select id="selectAdmin" resultType="com.qf.pojo.Admin">
+    <select id="selectAdminByUsernameAndPassword" resultType="com.qf.pojo.Admin">
         SELECT
         *
         FROM

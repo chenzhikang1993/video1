@@ -9,16 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 //茹东杰
+
 @Service
 public class SpeakerServiceImpl implements SpeakerService {
+
     @Autowired
     private SpeakerMapper speakerMapper;
 
-    @Override
-    public List<Speaker> findAll() {
-        return speakerMapper.findAll();
-    }
+//    @Override
+//    public List<Speaker> findAll() {
+//        return speakerMapper.findAll();
+//    }
 
     @Override
     public Boolean UpdateSpeaker(Speaker speaker) {
@@ -31,12 +34,12 @@ public class SpeakerServiceImpl implements SpeakerService {
 
     @Override
     public Speaker selectById(String id) {
-        return speakerMapper.selectById(id);
+        return speakerMapper.selectSpeakerById(id);
     }
 
     @Override
     public boolean delById(String id) {
-        if (speakerMapper.delById(id) == 1) {
+        if (speakerMapper.deleteById(id) == 1) {
             return true;
         } else {
             return false;
@@ -63,5 +66,11 @@ public class SpeakerServiceImpl implements SpeakerService {
         speakerPage.setSize(queryVo.getSize());
 
         return speakerPage;
+
+
+    }
+
+    public List<Speaker> selectAll() {
+        return speakerMapper.selectAll();
     }
 }
