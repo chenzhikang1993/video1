@@ -106,5 +106,20 @@ public class VideoController {
         return "behind/addVideo";
     }
 
+    @RequestMapping("showVideo1")
+    public String showVideo1(String videoId, String subjectName, Model model) {
+
+        model.addAttribute("subjectName",subjectName);
+        //查询视频
+        Video video = videoService.findById(videoId);
+        //课程
+        Course course = courseService.findByvideoId(video.getCourseId() +"");
+
+
+        model.addAttribute("video",video);
+        model.addAttribute("course", course);
+        return "before/section";
+    }
+
 
 }

@@ -15,4 +15,5 @@ public interface VideoService {
     Page<Video> selectVideoByQueryVo(QueryVo queryVo);
 
     Boolean deleteById(String[] ids);
+    Video findById(String id);
 }

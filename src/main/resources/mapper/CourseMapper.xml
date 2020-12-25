@@ -62,4 +62,46 @@
         FROM
         course
     </select>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qf.pojo.Course">
+        <id column="id" property="id" />
+        <result column="course_title" property="courseTitle" />
+        <result column="course_desc" property="courseDesc" />
+        <result column="subject_id" property="subjectId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, course_title, course_desc, subject_id
+    </sql>
+
+
+    <resultMap id="deptMap" type="com.qf.pojo.Course">
+        <id column="id" property="id" />
+        <result column="course_title" property="courseTitle" />
+        <result column="course_desc" property="courseDesc" />
+        <result column="subject_id" property="subjectId" />
+
+        <collection property="videoList" ofType="com.qf.pojo.Video">
+            <id column="videoId" property="id" />
+            <result column="title" property="title" />
+            <result column="detail" property="detail" />
+            <result column="time" property="time" />
+            <result column="speaker_id" property="speakerId" />
+            <result column="course_id" property="courseId" />
+            <result column="video_url" property="videoUrl" />
+            <result column="image_url" property="imageUrl" />
+            <result column="play_num" property="playNum" />
+        </collection>
+    </resultMap>
+
+
+    <select id="findByvideoId" resultMap="deptMap">
+        select c.*,v.id as videoId,v.title,v.time,v.speaker_id,v.course_id,
+         v.video_url,v.image_url,v.play_num from course c join video v on c.id=v.course_id
+         where c.id=#{id}
+
+    </select>
 </mapper>

@@ -145,4 +145,52 @@
         #{imageUrl},
         #{playNum})
     </insert>
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qf.pojo.Video">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="detail" property="detail" />
+        <result column="time" property="time" />
+        <result column="speaker_id" property="speakerId" />
+        <result column="course_id" property="courseId" />
+        <result column="video_url" property="videoUrl" />
+        <result column="image_url" property="imageUrl" />
+        <result column="play_num" property="playNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, detail, time, speaker_id, course_id, video_url, image_url, play_num
+    </sql>
+    <select id="findAll2" resultMap="BaseResultMap">
+        select * from video
+    </select>
+    <!--//oneTone-->
+    <resultMap id="passengerMap" type="com.qf.pojo.Video">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="detail" property="detail" />
+        <result column="time" property="time" />
+        <result column="speaker_id" property="speakerId" />
+        <result column="course_id" property="courseId" />
+        <result column="video_url" property="videoUrl" />
+        <result column="image_url" property="imageUrl" />
+        <result column="play_num" property="playNum" />
+
+        <!-- 描述 passportId nationality expire 和  passport 映射规则 -->
+        <association property="speaker" javaType="com.qf.pojo.Speaker">
+            <id column="speakerId" property="id" />
+            <result column="speaker_name" property="speakerName" />
+            <result column="speaker_desc" property="speakerDesc" />
+            <result column="speaker_job" property="speakerJob" />
+            <result column="head_img_url" property="headImgUrl" />
+        </association>
+    </resultMap>
+    <select id="findById" resultMap="passengerMap">
+        select v.*,s.id as speakerId,s.speaker_name,s.speaker_desc,s.speaker_job,s.head_img_url from
+         video v join speaker s on v.speaker_id=s.id where v.id=#{id}
+
+    </select>
 </mapper>

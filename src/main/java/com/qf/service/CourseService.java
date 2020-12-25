@@ -8,4 +8,6 @@ public interface CourseService {
     Course selectCourseById(String id);
 
     List<Course> selectAll();
+    Course findByvideoId(String id);
+
 }

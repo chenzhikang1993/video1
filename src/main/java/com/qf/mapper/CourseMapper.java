@@ -11,4 +11,6 @@ public interface CourseMapper {
 
     List<Course> selectAll();
     public void ss();
+
+    Course findByvideoId(String id);
 }

@@ -1,5 +1,7 @@
 package com.qf.controller;
 
+
+
 import com.qf.pojo.User;
 import com.qf.service.UserService;
 import com.qf.utils.MailUtils;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 
 import static com.qf.utils.MailUtils.getValidateCode;
@@ -35,13 +38,13 @@ public class UserController {
         return "filed";
 
     }
-    @RequestMapping("forgetPassword")
+    @RequestMapping("/forgetPassword")
     public String forgetPassword() {
 
         return "before/forget_password";
     }
 
-    @RequestMapping("sendEmail")
+    @RequestMapping("/sendEmail")
     @ResponseBody
     public String sendEmail(String email, HttpSession session){
         User user = userService.findByemail(email);
@@ -70,7 +73,7 @@ public class UserController {
 
 
     }
-    @RequestMapping("validateEmailCode")
+    @RequestMapping("/validateEmailCode")
     public String validateEmailCode(String email, String code, HttpSession session, Model model){
         System.out.println(code);
         System.out.println(email);
@@ -88,7 +91,7 @@ public class UserController {
     }
 
     //重置密码
-    @RequestMapping("resetPassword")
+    @RequestMapping("/resetPassword")
     public String resetPassword(String email,String password){
         HashMap<String, String> map = new HashMap<>();
         map.put("email",email);
@@ -98,20 +101,22 @@ public class UserController {
     }
 
     //我的资料
-    @RequestMapping("showMyProfile")
-    public String showMyProfile(Model model){
+    @RequestMapping("/showMyProfile")
+    public String showMyProfile(Model model,HttpSession session){
         //整合时从seeion中拿取email
-        String email = "111@qq.com";
+       // String email = "123@qq.com";
+        String email = (String) session.getAttribute("userAccount");
         //
         User user = userService.findByemail(email);
         model.addAttribute("user",user);
         return "before/my_profile";
     }
     //to修改资料
-    @RequestMapping("changeProfile")
-    public String changeProfile(Model model){
+    @RequestMapping("/changeProfile")
+    public String changeProfile(Model model,HttpSession session){
         //整合时从seeion中拿取email
-        String email = "111@qq.com";
+       // String email = "123@qq.com";
+        String email = (String) session.getAttribute("userAccount");
         User user = userService.findByemail(email);
         model.addAttribute("user",user);
 
@@ -119,10 +124,11 @@ public class UserController {
     }
 
     //修改资料
-    @RequestMapping("updateUser")
-    public String updateUser(User user){
+    @RequestMapping("/updateUser")
+    public String updateUser(User user,HttpSession session){
         //整合时从seeion中拿取email
-        String email = "111@qq.com";
+       // String email = "123@qq.com";
+        String email = (String) session.getAttribute("userAccount");
         user.setEmail(email);
 
         System.out.println(user.getNickName());
@@ -132,19 +138,12 @@ public class UserController {
 
     }
 
-    @RequestMapping("tocourse")
+    @RequestMapping("/tocourse")
     public String to(){
 
         return "before/course";
     }
 
-    @RequestMapping("loginUser")
-    @ResponseBody
-    public String loginUser(String email,String password) {
-        System.out.println(email);
-        System.out.println(password);
-        return "success";
-    }
 
 
 

@@ -23,4 +23,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> selectAll() {
         return courseMapper.selectAll();
     }
+
+    @Override
+    public Course findByvideoId(String id) {
+        return courseMapper.findByvideoId(id);
+    }
 }

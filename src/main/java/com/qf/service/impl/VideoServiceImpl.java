@@ -55,4 +55,9 @@ public class VideoServiceImpl implements VideoService {
         }
         return flag;
     }
+
+    @Override
+    public Video findById(String id) {
+        return videoMapper.findById(id);
+    }
 }
