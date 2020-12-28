@@ -39,6 +39,7 @@
 
     </update>
 
+
     <update id="updateUser" parameterType="com.qf.pojo.User">
         UPDATE user SET
         email = #{email},
@@ -53,6 +54,24 @@
         createTime = #{createTime}
         WHERE
         id = #{id};
+
     </update>
 
+    <update id="updatePasswoedByEmail">
+        update user set password=#{password} where email=#{email}
+
+    </update>
+
+
+
+    <insert id="insertUser" parameterType="com.qf.pojo.User">
+        insert into user (email,password,createTime)
+        values (#{email},#{password},#{createTime})
+    </insert>
+
+    <select id="selectUserByEmail" resultType="com.qf.pojo.User">
+       select * from user
+        where
+        email = #{email}
+    </select>
 </mapper>

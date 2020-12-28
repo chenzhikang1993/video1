@@ -101,7 +101,7 @@
                     </c:if>
 
                     <c:if test="${not empty user.imgUrl}">
-                        <img id="avatar" src="http://localhost:8080/Videos/userAvatar/${user.imgUrl}" alt="">
+                        <img id="avatar" src="http://localhost:8087/upload/${user.imgUrl}" alt="">
                     </c:if>
 
                 </a>
@@ -131,7 +131,7 @@
                         </c:if>
 
                         <c:if test="${not empty user.imgUrl}">
-                            <img id="avatar" width="180px" height="180px" src="http://localhost:8080/Videos/userAvatar/${user.imgUrl}" alt="">
+                            <img id="avatar" width="180px" height="180px" src="http://localhost:8087/upload/${user.imgUrl}" alt="">
                         </c:if>
 
                     </div>

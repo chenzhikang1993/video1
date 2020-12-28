@@ -44,4 +44,27 @@ public class UserServiceImpl implements UserService {
     public Boolean updateUser(User user) {
         return userMapper.updateUser(user);
     }
+
+
+    public int updatePasswoedByEmail(String email, String password) {
+        return userMapper.updatePasswoedByEmail(email, password);
+
+    }
+
+    @Override
+    public Boolean insertUser(User user) {
+        int i = userMapper.insertUser(user);
+
+        if (i == 1) {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    @Override
+    public User selectUserByEmail(String email) {
+        return userMapper.selectUserByEmail();
+    }
 }

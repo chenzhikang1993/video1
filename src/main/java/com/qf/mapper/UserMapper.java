@@ -12,7 +12,13 @@ public interface UserMapper extends BaseMapper<User> {
     User selectUserByEmailAndPassword(User user);
     public Integer updateByEmail(Map map);
 
+    int updatePasswoedByEmail(String email,String password);
+
     public Integer updateByEmail2(User user);
 
     Boolean updateUser(User user);
+
+    int insertUser(User user);
+
+    User selectUserByEmail();
 }

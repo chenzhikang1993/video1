@@ -116,7 +116,7 @@ $("#regEmail").blur(function () {
     if (null != emailVal && "" != emailVal) {
         var params = {"email": emailVal};
         // alert(params);
-        $.post('/' + getRootPath() + "/user/validateEmail", params, function (data) {
+        $.post("/user/validateEmail", params, function (data) {
             if (data == "success") {
                 regIsCommitEmail = true;
                 $("#emailMsg").text("该邮箱可用").css("color", "green");
@@ -149,7 +149,7 @@ $("#regPswAgain").blur(function () {
 
 $("#loginout").click(function () {
 
-    $.get('/' + getRootPath() + "/user/loginOut", null, function () {
+    $.get("/user/loginOut", null, function () {
         $("#regBlock").css("display", "block");
         $("#userBlock").css("display", "none");
     });
@@ -171,10 +171,11 @@ function commitRegForm() {
 
         $.ajax({
 
-            url: '/' + getRootPath() + "/user/insertUser",
+            url: "/user/insertUser",
             data: $("#regForm").serialize(),
             type: "POST",
             success: function (data) {
+                
                 if (data == 'success') {
                     //注册框消失
                     $("#reg").addClass("hidden");

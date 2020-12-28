@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -37,13 +39,45 @@ public class UserController {
         User user1 = userService.selectUserByEmailAndPassword(user);
         if (user1 != null) {
             HttpSession session = request.getSession();
+
             session.setAttribute("userAccount", user1.getEmail());
-            session.setAttribute("user",user1);
+            session.setAttribute("user", user1);
+
             return "success";
         }
         return "filed";
 
     }
+
+
+    @RequestMapping("/validateEmail")
+    @ResponseBody
+    public String validateEmail(String email) {
+        User user = userService.selectUserByEmail(email);
+        if (null == user) {
+            return "success";
+        }
+        return "hasUser";
+    }
+
+    //注册
+    //茹东杰
+    @RequestMapping("/insertUser")
+    @ResponseBody
+    public String insertUser(User user, HttpServletRequest request) {
+
+        user.setCreateTime(new Date());
+
+        if (userService.insertUser(user)) {
+
+            //System.out.println(userService.insertUser(user));
+            HttpSession session = request.getSession();
+            session.setAttribute("userAccount", user.getEmail());
+            return "success";
+        }
+        throw new RuntimeException("用户注册失败");
+    }
+
 
     @RequestMapping("/forgetPassword")
     public String forgetPassword() {
@@ -150,6 +184,7 @@ public class UserController {
         return "before/course";
     }
 
+
     //茹东杰
     @RequestMapping("/changeAvatar")
     public String changeAvatar() {
@@ -180,12 +215,82 @@ public class UserController {
 
         HttpSession session = request.getSession();
         System.out.println("---------------------+++++++++++++++++++++--------------------------------------------------------");
-        User  user= (User) session.getAttribute("user");
-        System.out.println(user+"-----------------------------------------------------------------------------");
+        User user = (User) session.getAttribute("user");
+        System.out.println(user + "-----------------------------------------------------------------------------");
         user.setImgUrl(filename);
         userService.updateUser(user);
 
         return "redirect:/user/showMyProfile";
+    }
+
+    /**
+     * 前台退出1
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("userAccount");
+
+        return "index";
+
+    }
+
+    /**
+     * 前台退出2
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("loginOut2")
+    public String loginOut2(HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("userAccount");
+
+        return "index";
+
+    }
+
+    @RequestMapping("passwordSafe")
+    public String passwordSafe() {
+        return "before/password_safe";
+    }
+
+    /**
+     * 修改密码-验证旧密码
+     *
+     * @param password
+     * @param request
+     * @return
+     */
+    @RequestMapping("validatePassword")
+    @ResponseBody
+    public String validatePassword(String password, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (password.equals(user.getPassword())) {
+            return "success";
+        }
+        return "false";
+    }
+
+    @RequestMapping("updatePassword")
+    public String updatePassword(HttpServletRequest request, String newPassword) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        userService.updatePasswoedByEmail(user.getEmail(), newPassword);
+
+        return "redirect:/user/showMyProfile";
+
+
     }
 
 

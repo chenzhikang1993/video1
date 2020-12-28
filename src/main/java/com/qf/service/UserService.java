@@ -13,5 +13,12 @@ public interface UserService {
 
     public Integer updateByEmail2(User user);
 
+
     Boolean updateUser(User user);
+
+    int updatePasswoedByEmail(String email,String password);
+
+    Boolean insertUser(User user);
+
+    User selectUserByEmail(String email);
 }
